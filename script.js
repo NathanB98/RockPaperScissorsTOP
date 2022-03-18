@@ -4,7 +4,6 @@ let computerSelection;
         let computerScore = 0;
      
         playerChoice();
-        winningScore();
 
         function playerChoice() {
             //sets each unique button to a unique variable, for further maniplulation
@@ -35,6 +34,8 @@ let computerSelection;
             //Displays the last move selected by player and comp, aswell as the current score.
             document.getElementById('lastMove').innerHTML = 'Player: ' + playerSelection.toUpperCase() + ' - Computer: ' + computerSelection.toUpperCase();
             document.getElementById('scoreBoard').innerHTML = 'Player Score: ' + playerScore + ' - Computer Score: ' + computerScore;
+
+            winningScore();
         }
 
         //Generates a random number from 1 to 3, and assigns a move based on this random number
@@ -80,12 +81,19 @@ let computerSelection;
         }
 
         function winningScore() {
-            //compares scores between player and computer to find the winner
-            if(playerScore > computerScore) {
-                console.log('Player is the winner!');
-            } else if (computerScore > playerScore) {
-                console.log('Computer is the winner!');
+            //Checks the score between player and computer. First to 5 points wins
+            if(playerScore == 5){
+                alert('You win! Player reached 5 points first!');
+
+                //resets the score for the next round.
+                playerScore = 0;
+                computerScore = 0;
+            } else if(computerScore == 5){
+                alert('You lose! Computer reached 5 points first!');
+
+                playerScore = 0;
+                computerScore = 0;
             } else {
-                console.log('The game is a draw!');
+                return;
             }
         }
