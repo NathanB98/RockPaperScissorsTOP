@@ -2,22 +2,35 @@ let computerSelection;
         let playerSelection;
         let playerScore = 0;
         let computerScore = 0;
-
-        game();
+     
+        playerChoice();
         console.log('Final score. Player: ' + playerScore + '. Computer: ' + computerScore + '.');
-        winningScore();
+        //winningScore();
+
+        function playerChoice() {
+            const btn1 = document.querySelector('#btnRock')
+            const btn2 = document.querySelector('#btnPaper')
+            const btn3 = document.querySelector('#btnScissor')
+
+            btn1.addEventListener('click', function(){
+                playerSelection = 'rock';
+                game();
+            });
+            btn2.addEventListener('click', function(){
+                playerSelection = 'paper';
+                game();
+            });
+            btn3.addEventListener('click', function(){
+                playerSelection = 'scissors';
+                game();
+            });
+        }
 
         function game() {
-            playerChoice();
-
             computerPlay(computerSelection);
             playRound(playerSelection, computerSelection);
             console.log('Player: ' + playerSelection);
             console.log('Computer: ' + computerSelection);
-        }
-
-        function playerChoice() {
-            
         }
 
         //Generates a random number from 1 to 3, and assigns a move based on this random number
