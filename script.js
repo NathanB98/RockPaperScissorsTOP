@@ -7,6 +7,19 @@ let computerSelection;
         console.log('Final score. Player: ' + playerScore + '. Computer: ' + computerScore + '.');
         winningScore();
 
+        function game() {
+            playerChoice();
+
+            computerPlay(computerSelection);
+            playRound(playerSelection, computerSelection);
+            console.log('Player: ' + playerSelection);
+            console.log('Computer: ' + computerSelection);
+        }
+
+        function playerChoice() {
+            
+        }
+
         //Generates a random number from 1 to 3, and assigns a move based on this random number
         function computerPlay() {
             let compChoice = Math.floor(Math.random() * 3) + 1;
@@ -27,9 +40,9 @@ let computerSelection;
         }
 
         function playRound() {
-            /*playerSelection = prompt('Enter your move:');
+            //playerSelection = prompt('Enter your move:');
+            //playerSelection = playerSelection.toLowerCase();
             //prevents issues with case sensitivity
-            playerSelection = playerSelection.toLowerCase();*/
 
             //tie game condition
             if(playerSelection == computerSelection) {
@@ -54,22 +67,6 @@ let computerSelection;
                 //catch for incorrect inputs
                 console.log('Please choose between: rock, paper, or scissors');
             }
-        }
-
-        function game() {
-            //loops 5 times for 5 games, shows the move of both player and computer for each round
-            //for(let i = 0; i <5; i++){
-                document.getElementById("buttonRock").addEventListener("click", playerChoice);
-
-                computerPlay(computerSelection);
-                playRound(playerSelection, computerSelection);
-                console.log('Player: ' + playerSelection);
-                console.log('Computer: ' + computerSelection);
-            //}
-        }
-
-        function playerChoice() {
-
         }
 
         function winningScore() {
