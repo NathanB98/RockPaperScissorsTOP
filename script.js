@@ -4,14 +4,16 @@ let computerSelection;
         let computerScore = 0;
      
         playerChoice();
-        console.log('Final score. Player: ' + playerScore + '. Computer: ' + computerScore + '.');
-        //winningScore();
+        winningScore();
 
         function playerChoice() {
+            //sets each unique button to a unique variable, for further maniplulation
             const btn1 = document.querySelector('#btnRock')
             const btn2 = document.querySelector('#btnPaper')
             const btn3 = document.querySelector('#btnScissor')
 
+            //eventlisteners that take a button click as input and set the players selection to the correct corresponding button
+            //after players choice is set, the game() function is called to continue playing after users choice.
             btn1.addEventListener('click', function(){
                 playerSelection = 'rock';
                 game();
@@ -29,8 +31,10 @@ let computerSelection;
         function game() {
             computerPlay(computerSelection);
             playRound(playerSelection, computerSelection);
-            console.log('Player: ' + playerSelection);
-            console.log('Computer: ' + computerSelection);
+
+            //Displays the last move selected by player and comp, aswell as the current score.
+            document.getElementById('lastMove').innerHTML = 'Player: ' + playerSelection.toUpperCase() + ' - Computer: ' + computerSelection.toUpperCase();
+            document.getElementById('scoreBoard').innerHTML = 'Player Score: ' + playerScore + ' - Computer Score: ' + computerScore;
         }
 
         //Generates a random number from 1 to 3, and assigns a move based on this random number
@@ -53,20 +57,16 @@ let computerSelection;
         }
 
         function playRound() {
-            //playerSelection = prompt('Enter your move:');
-            //playerSelection = playerSelection.toLowerCase();
-            //prevents issues with case sensitivity
-
             //tie game condition
             if(playerSelection == computerSelection) {
-                console.log('Tie game!');
+                document.getElementById('resultsForm').innerHTML = 'Tie Game!';
             } else if (
                 //conditions for the player to lose the round
                 (playerSelection == 'scissors' && computerSelection == 'rock') ||
                 (playerSelection == 'paper' && computerSelection == 'scissors') ||
                 (playerSelection == 'rock' && computerSelection == 'paper')
             ) {
-                console.log('You lose! ' + computerSelection + ' beats ' + playerSelection);
+                document.getElementById('resultsForm').innerHTML = 'You lose! ' + computerSelection.toUpperCase() + ' beats ' + playerSelection.toUpperCase();
                 return computerScore += 1;
             } else if (
                 //conditions for the computer to lose the round
@@ -74,11 +74,8 @@ let computerSelection;
                 (computerSelection == 'paper' && playerSelection == 'scissors') ||
                 (computerSelection == 'rock' && playerSelection == 'paper')
             ){
-                console.log('You win! ' + playerSelection + ' beats ' + computerSelection);
+                document.getElementById('resultsForm').innerHTML = 'You win! ' + playerSelection.toUpperCase() + ' beats ' + computerSelection.toUpperCase();
                 return playerScore += 1;
-            } else {
-                //catch for incorrect inputs
-                console.log('Please choose between: rock, paper, or scissors');
             }
         }
 
